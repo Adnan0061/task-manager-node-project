@@ -17,7 +17,7 @@ const showTasks = async () => {
     }
     const allTasks = tasks
       .map((task) => {
-        const { completed, _id: taskID, name } = task;
+        const { completed, _id: taskID, name, isProtected } = task;
         console.log(taskID, completed, name);
 
         return `<div class="single-task ${completed && "task-completed"}">
@@ -31,9 +31,13 @@ const showTasks = async () => {
 <i class="fas fa-edit"></i>
 </a>
 <!-- delete btn -->
-<button type="button" class="delete-btn" data-id="${taskID}">
-<i class="fas fa-trash"></i>
-</button>
+${
+  !isProtected
+    ? `<button type="button" class="delete-btn" data-id="${taskID}">
+      <i class="fas fa-trash"></i>
+    </button>`
+    : ""
+}
 </div>
 </div>`;
       })
