@@ -104,7 +104,7 @@ console.log(
   taskInputDOM.value,
   "typeof taskInputDOM.value =",
   typeof taskInputDOM.value,
-  "taskSubmitDOM =",
+  "submitBtnDOM =",
   submitBtnDOM
 );
 
@@ -112,7 +112,6 @@ console.log(
 
 formDOM.addEventListener("submit", async (e) => {
   e.preventDefault();
-  console.log("taskSubmitDOM", taskSubmitDOM);
   const name = taskInputDOM.value;
 
   try {
