@@ -6,11 +6,20 @@ const errorHandlerMiddleware = require("../middleware/custom-error-handlers");
 
 const getAllTasks = asyncWrapper(async (req, res) => {
   const tasks = await Task.find();
-  res.status(201).json({ tasks });
+  // res.status(201).json({ tasks });
+  res.status(201).json({
+    status: "success",
+    message: `Got all recieved`,
+    task,
+  });
 });
 const createPost = asyncWrapper(async (req, res) => {
   const task = await Task.create(req.body);
-  res.status(201).json({ task });
+  res.status(201).json({
+    status: "success",
+    message: `Task created`,
+    task,
+  });
 });
 const getTask = asyncWrapper(async (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -20,7 +29,11 @@ const getTask = asyncWrapper(async (req, res, next) => {
   if (!task) {
     return next(createCustomError("Task Not Found", 404));
   }
-  res.status(201).json(task);
+  res.status(201).json({
+    status: "success",
+    message: `Got the task`,
+    task,
+  });
 });
 const updateTask = asyncWrapper(async (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
