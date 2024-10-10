@@ -2,7 +2,17 @@ const tasksDOM = document.querySelector(".tasks");
 const loadingDOM = document.querySelector(".loading-text");
 const formDOM = document.querySelector(".task-form");
 const taskInputDOM = document.querySelector(".task-input");
+const submitBtnDOM = document.querySelector("#submit-btn");
 const formAlertDOM = document.querySelector(".form-alert");
+
+// default submit btn disable
+const disableSubmitBtn = () => {
+  submitBtnDOM.disabled = true;
+  return;
+};
+
+disableSubmitBtn();
+
 // Load tasks from /api/tasks
 const showTasks = async () => {
   loadingDOM.style.visibility = "visible";
@@ -18,7 +28,6 @@ const showTasks = async () => {
     const allTasks = tasks
       .map((task) => {
         const { completed, _id: taskID, name, isProtected } = task;
-        console.log(taskID, completed, name);
 
         return `<div class="single-task ${completed && "task-completed"}">
 <h5><span><i class="far fa-check-circle"></i></span>${name}</h5>
@@ -69,10 +78,41 @@ tasksDOM.addEventListener("click", async (e) => {
   loadingDOM.style.visibility = "hidden";
 });
 
+// submit btn disable
+taskInputDOM.addEventListener("input", (e) => {
+  const el = e.target.value;
+  if (el == "") {
+    submitBtnDOM.disabled = true;
+    // submitBtnDOM.style.visibility = "hidden";
+  }
+  if (el !== "") {
+    submitBtnDOM.disabled = false;
+    // submitBtnDOM.style.visibility = "block";
+  }
+  console.log(
+    "e1",
+    el,
+    "submitBtnDOM.disable",
+    submitBtnDOM.disabled,
+    submitBtnDOM
+  );
+  // loadingDOM.style.visibility = "hidden";
+});
+
+console.log(
+  "taskInputDOM.value =",
+  taskInputDOM.value,
+  "typeof taskInputDOM.value =",
+  typeof taskInputDOM.value,
+  "taskSubmitDOM =",
+  submitBtnDOM
+);
+
 // form
 
 formDOM.addEventListener("submit", async (e) => {
   e.preventDefault();
+  console.log("taskSubmitDOM", taskSubmitDOM);
   const name = taskInputDOM.value;
 
   try {

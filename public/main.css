@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400|Inconsolata:400');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400|Inconsolata:400");
 *,
 ::after,
 ::before {
@@ -45,8 +45,8 @@
   --green-dark: #0f5132;
 
   /* typography */
-  --headingFont: 'Inconsolata', monospace;
-  --bodyFont: 'Montserrat', sans-serif;
+  --headingFont: "Inconsolata", monospace;
+  --bodyFont: "Montserrat", sans-serif;
   --smallText: 0.7em;
   /* rest */
   --backgroundColor: var(--grey-50);
@@ -150,6 +150,12 @@ a {
 .btn:hover {
   color: var(--white);
   background: var(--primary-700);
+  box-shadow: var(--shadow-2);
+}
+
+.btn:disabled {
+  color: var(--white);
+  background: var(--grey-600);
   box-shadow: var(--shadow-2);
 }
 button.small {
@@ -300,7 +306,7 @@ form > :last-child {
 .form-loading::before {
   background: var(--white);
   position: absolute;
-  content: '';
+  content: "";
   height: 100%;
   width: 100%;
   top: 0;
@@ -310,7 +316,7 @@ form > :last-child {
 }
 
 .form-loading::after {
-  content: '';
+  content: "";
   position: absolute;
   top: calc(50% - 3rem);
   left: calc(50% - 3rem);
