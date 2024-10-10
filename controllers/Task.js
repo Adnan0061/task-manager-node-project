@@ -10,7 +10,7 @@ const getAllTasks = asyncWrapper(async (req, res) => {
   res.status(201).json({
     status: "success",
     message: `Got all recieved`,
-    task,
+    tasks,
   });
 });
 const createPost = asyncWrapper(async (req, res) => {
