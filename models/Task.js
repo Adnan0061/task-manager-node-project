@@ -28,6 +28,14 @@ const TaskSchema = new mongoose.Schema({
     // },
   },
   // isProtected: { type: Boolean, required: true, default: false },
+  priority: {
+    type: String,
+    enum: {
+      values: ["low", "medium", "high"],
+      message: "priority validator failed",
+    },
+    required: true,
+  },
   estimatedTime: { type: Number, required: true, default: 5 },
   completed: { type: Boolean, required: true, default: false },
 });
