@@ -2,20 +2,33 @@
 const mongoose = require("mongoose");
 
 const TaskSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: [true, "must include name"],
     trim: true,
     minlength: [3, "name cannot be less than 3 character"],
     maxlength: [20, "name cannot be less than 20 character"],
     validate: {
-      validator: function(v) {
+      validator: function (v) {
         return /^[a-zA-Z0-9\s\-_]+$/.test(v);
       },
-      message: props => `${props.value} contains invalid characters. Use only alphanumeric characters, spaces, hyphens, and underscores.`
-    }
+      message: (props) =>
+        `${props.value} contains invalid characters. Use only alphanumeric characters, spaces, hyphens, and underscores.`,
+    },
   },
-  isProtected: { type: Boolean, required: true, default: false },
+  description: {
+    type: String,
+    maxlength: [200, "name cannot be less than 20 character"],
+    // validate: {
+    //   validator: function (v) {
+    //     return /^[a-zA-Z0-9\s\-_]+$/.test(v);
+    //   },
+    //   message: (props) =>
+    //     `${props.value} contains invalid characters. Use only alphanumeric characters, spaces, hyphens, and underscores.`,
+    // },
+  },
+  // isProtected: { type: Boolean, required: true, default: false },
+  estimatedTime: { type: Number, required: true, default: 5 },
   completed: { type: Boolean, required: true, default: false },
 });
 
