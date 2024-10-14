@@ -27,10 +27,10 @@ const showTasks = async () => {
     }
     const allTasks = tasks
       .map((task) => {
-        const { completed, _id: taskID, name, isProtected } = task;
+        const { completed, _id: taskID, title, isProtected } = task;
 
         return `<div class="single-task ${completed && "task-completed"}">
-<h5><span><i class="far fa-check-circle"></i></span>${name}</h5>
+<h5><span><i class="far fa-check-circle"></i></span>${title}</h5>
 <div class="task-links">
 
 
@@ -89,27 +89,17 @@ taskInputDOM.addEventListener("input", (e) => {
     submitBtnDOM.disabled = false;
     // submitBtnDOM.style.visibility = "block";
   }
-  console.log(
-    "e1",
-    el,
-    "submitBtnDOM.disable",
-    submitBtnDOM.disabled,
-    submitBtnDOM
-  );
+  // console.log(
+  //   "e1",
+  //   el,
+  //   "submitBtnDOM.disable",
+  //   submitBtnDOM.disabled,
+  //   submitBtnDOM
+  // );
   // loadingDOM.style.visibility = "hidden";
 });
 
-console.log(
-  "taskInputDOM.value =",
-  taskInputDOM.value,
-  "typeof taskInputDOM.value =",
-  typeof taskInputDOM.value,
-  "submitBtnDOM =",
-  submitBtnDOM
-);
-
 // form
-
 formDOM.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = taskInputDOM.value;
