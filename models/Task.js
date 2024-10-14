@@ -19,6 +19,7 @@ const TaskSchema = new mongoose.Schema({
   description: {
     type: String,
     maxlength: [200, "name cannot be less than 20 character"],
+    default: "",
     // validate: {
     //   validator: function (v) {
     //     return /^[a-zA-Z0-9\s\-_]+$/.test(v);
@@ -35,6 +36,7 @@ const TaskSchema = new mongoose.Schema({
       message: "priority validator failed",
     },
     required: true,
+    default: "low",
   },
   estimatedTime: { type: Number, required: true, default: 5 },
   completed: { type: Boolean, required: true, default: false },

@@ -102,10 +102,10 @@ taskInputDOM.addEventListener("input", (e) => {
 // form
 formDOM.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const name = taskInputDOM.value;
+  const title = taskInputDOM.value;
 
   try {
-    await axios.post("/api/v1/tasks", { name });
+    await axios.post("/api/v1/tasks", { title });
     showTasks();
     taskInputDOM.value = "";
     formAlertDOM.style.display = "block";

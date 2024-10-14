@@ -1,5 +1,8 @@
 const taskIDDOM = document.querySelector(".task-edit-id");
-const taskNameDOM = document.querySelector(".task-edit-name");
+const taskTitleDOM = document.querySelector("[data-task-edit-title]");
+const taskDescriptionDOM = document.querySelector(
+  "[data-task-edit-description]"
+);
 const taskCompletedDOM = document.querySelector(".task-edit-completed");
 const editFormDOM = document.querySelector(".single-task-form");
 const editBtnDOM = document.querySelector(".task-edit-btn");
@@ -10,13 +13,17 @@ let tempName;
 
 const showTask = async () => {
   try {
-    const { data: task } = await axios.get(`/api/v1/tasks/${id}`);
-    console.log(task);
-    const { _id: taskID, completed, name } = task;
+    const {
+      data: { task },
+    } = await axios.get(`/api/v1/tasks/${id}`);
+    console.log(taskTitleDOM);
+    const { _id: taskID, completed, title, description } = task;
+    console.log(taskID, completed, title, description);
 
     taskIDDOM.textContent = taskID;
-    taskNameDOM.value = name;
-    tempName = name;
+    taskTitleDOM.value = title;
+    taskDescriptionDOM.value = description;
+    tempName = title;
     if (completed) {
       taskCompletedDOM.checked = true;
     }
@@ -31,22 +38,25 @@ editFormDOM.addEventListener("submit", async (e) => {
   editBtnDOM.textContent = "Loading...";
   e.preventDefault();
   try {
-    const taskName = taskNameDOM.value;
+    const taskTitle = taskTitleDOM.value;
+    const taskDescription = taskDescriptionDOM.value;
     const taskCompleted = taskCompletedDOM.checked;
 
     const {
       data: { task },
     } = await axios.patch(`/api/v1/tasks/${id}`, {
-      name: taskName,
+      title: taskTitle,
+      description: taskDescription,
       completed: taskCompleted,
     });
 
-    const { _id: taskID, completed, name } = task;
-    console.log(taskID, completed, name);
+    const { _id: taskID, completed, title, description } = task;
+    console.log(taskID, completed, title, description);
 
     taskIDDOM.textContent = taskID;
-    taskNameDOM.value = name;
-    tempName = name;
+    taskTitleDOM.value = title;
+    taskDescriptionDOM.value = description;
+    tempName = title;
     if (completed) {
       taskCompletedDOM.checked = true;
     }
@@ -55,7 +65,7 @@ editFormDOM.addEventListener("submit", async (e) => {
     formAlertDOM.classList.add("text-success");
   } catch (error) {
     console.error(error);
-    taskNameDOM.value = tempName;
+    taskTitleDOM.value = tempName;
     formAlertDOM.style.display = "block";
     formAlertDOM.innerHTML = `error, please try again`;
   }
