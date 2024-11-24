@@ -13,7 +13,7 @@ const getAllTasks = asyncWrapper(async (req, res) => {
     tasks,
   });
 });
-const createPost = asyncWrapper(async (req, res) => {
+const createTask = asyncWrapper(async (req, res) => {
   const task = await Task.create(req.body);
   res.status(201).json({
     status: "success",
@@ -73,7 +73,7 @@ const deleteTask = asyncWrapper(async (req, res, next) => {
 
 module.exports = {
   getAllTasks,
-  createPost,
+  createTask,
   getTask,
   updateTask,
   deleteTask,

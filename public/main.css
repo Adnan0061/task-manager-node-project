@@ -43,6 +43,8 @@
   --red-dark: #842029;
   --green-light: #d1e7dd;
   --green-dark: #0f5132;
+  --yellow-light: #fff3cd;
+  --yellow-dark: #856404;
 
   /* typography */
   --headingFont: "Inconsolata", monospace;
@@ -188,7 +190,6 @@ form {
 label {
   display: block;
   font-size: var(--smallText);
-  margin-bottom: 0.5rem;
   text-transform: capitalize;
 }
 
@@ -221,7 +222,8 @@ textarea {
 .task-form,
 .single-task-form {
   width: 90vw;
-  max-width: var(--fixed-width);
+  /* max-width: var(--fixed-width); */
+  max-width: 60vw;
   margin: 0 auto;
   margin-top: 6rem;
 }
@@ -234,6 +236,14 @@ textarea {
 .submit-btn {
   width: 100%;
   margin-top: 1rem;
+}
+
+.create-priority {
+  margin-top: 0.5rem;
+  display: flex;
+  align-self: center;
+  gap: 0.5rem;
+  font-size: larger;
 }
 @media screen and (min-width: 576px) {
   .form-control {
@@ -346,9 +356,23 @@ form > :last-child {
   display: grid;
   gap: 1rem;
 }
+.priority-low {
+  background-color: var(--green-light);
+}
+.priority-medium {
+  background-color: var(--yellow-light);
+}
+.priority-urgent {
+  background-color: var(--red-light);
+}
+.edit-priority-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 .single-task {
   padding: 1rem 2.5rem;
-  background: var(--white);
+  /* background: var(--white); */
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
   transition: var(--transition);

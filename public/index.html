@@ -31,6 +31,40 @@
           submit
         </button>
       </div>
+      <!-- priority -->
+      <div class="form-control create-priority">
+        <label for="priority">Priority:</label>
+        <div class="edit-priority-container">
+          <div class="edit-priority-container">
+            <input
+              type="radio"
+              checked
+              name="priority"
+              value="low"
+              id="priority-low"
+            />
+            <label for="priority-low">Low</label>
+          </div>
+          <div class="edit-priority-container">
+            <input
+              type="radio"
+              name="priority"
+              value="medium"
+              id="priority-medium"
+            />
+            <label for="priority-medium">Medium</label>
+          </div>
+          <div class="edit-priority-container">
+            <input
+              type="radio"
+              name="priority"
+              value="urgent"
+              id="priority-urgent"
+            />
+            <label for="priority-urgent">Urgent</label>
+          </div>
+        </div>
+      </div>
       <div class="form-alert"></div>
     </form>
     <section class="tasks-container">
@@ -44,12 +78,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <!-- <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script> -->
     <script src="./browser-app.js"></script>
   </body>
 </html>

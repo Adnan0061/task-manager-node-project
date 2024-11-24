@@ -8,7 +8,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
       message: err.message,
       task: {},
     });
-  res.status(500).send("Someting went wrong");
+  res.status(500).send(err);
 };
 
 module.exports = errorHandlerMiddleware;

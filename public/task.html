@@ -32,12 +32,43 @@
         </div>
         <div class="form-control">
           <label for="description">Description</label>
-          <input
-            type="text"
+          <textarea
             name="description"
             data-task-edit-description
-            class="task-edit-name"
-          />
+            class="task-edit-description"
+          ></textarea>
+        </div>
+        <div class="form-control">
+          <label for="priority">Priority</label>
+          <div class="edit-priority-container">
+            <div class="edit-priority-container">
+              <input
+                type="radio"
+                name="priority"
+                value="low"
+                id="priority-low"
+              />
+              <label for="priority-low">Low</label>
+            </div>
+            <div class="edit-priority-container">
+              <input
+                type="radio"
+                name="priority"
+                value="medium"
+                id="priority-medium"
+              />
+              <label for="priority-medium">Medium</label>
+            </div>
+            <div class="edit-priority-container">
+              <input
+                type="radio"
+                name="priority"
+                value="urgent"
+                id="priority-urgent"
+              />
+              <label for="priority-urgent">Urgent</label>
+            </div>
+          </div>
         </div>
         <div class="form-control">
           <label for="completed">completed</label>

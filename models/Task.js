@@ -6,8 +6,8 @@ const TaskSchema = new mongoose.Schema({
     type: String,
     required: [true, "must include name"],
     trim: true,
-    minlength: [3, "name cannot be less than 3 character"],
-    maxlength: [20, "name cannot be less than 20 character"],
+    minlength: [3, "title cannot be less than 3 character"],
+    maxlength: [60, "title cannot be more than 60 character"],
     validate: {
       validator: function (v) {
         return /^[a-zA-Z0-9\s\-_]+$/.test(v);
@@ -18,7 +18,7 @@ const TaskSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    maxlength: [200, "name cannot be less than 20 character"],
+    maxlength: [600, "description cannot be more than 600 character"],
     default: "",
     // validate: {
     //   validator: function (v) {
@@ -32,7 +32,7 @@ const TaskSchema = new mongoose.Schema({
   priority: {
     type: String,
     enum: {
-      values: ["low", "medium", "high"],
+      values: ["low", "medium", "urgent"],
       message: "priority validator failed",
     },
     required: true,

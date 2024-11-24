@@ -2,6 +2,7 @@ const tasksDOM = document.querySelector(".tasks");
 const loadingDOM = document.querySelector(".loading-text");
 const formDOM = document.querySelector(".task-form");
 const taskInputDOM = document.querySelector(".task-input");
+const taskPriorityDOM = document.querySelectorAll("input[name='priority']");
 const submitBtnDOM = document.querySelector("#submit-btn");
 const formAlertDOM = document.querySelector(".form-alert");
 
@@ -27,28 +28,28 @@ const showTasks = async () => {
     }
     const allTasks = tasks
       .map((task) => {
-        const { completed, _id: taskID, title, isProtected } = task;
+        const { completed, _id: taskID, title, isProtected, priority } = task;
+        const priorityClass = priority ? `priority-${priority}` : "";
 
-        return `<div class="single-task ${completed && "task-completed"}">
-<h5><span><i class="far fa-check-circle"></i></span>${title}</h5>
-<div class="task-links">
-
-
-
-<!-- edit link -->
-<a href="task.html?id=${taskID}"  class="edit-link">
-<i class="fas fa-edit"></i>
-</a>
-<!-- delete btn -->
-${
-  !isProtected
-    ? `<button type="button" class="delete-btn" data-id="${taskID}">
-      <i class="fas fa-trash"></i>
-    </button>`
-    : ""
-}
-</div>
-</div>`;
+        return `<div class="single-task ${
+          completed && "task-completed"
+        } ${priorityClass}">
+                  <h5><span><i class="far fa-check-circle"></i></span>${title}</h5>
+                  <div class="task-links">
+                    <!-- edit link -->
+                    <a href="task.html?id=${taskID}"  class="edit-link">
+                    <i class="fas fa-edit"></i>
+                    </a>
+                    <!-- delete btn -->
+                    ${
+                      !isProtected
+                        ? `<button type="button" class="delete-btn" data-id="${taskID}">
+                          <i class="fas fa-trash"></i>
+                        </button>`
+                        : ""
+                    }
+                  </div>
+                </div>`;
       })
       .join("");
     tasksDOM.innerHTML = allTasks;
@@ -103,9 +104,10 @@ taskInputDOM.addEventListener("input", (e) => {
 formDOM.addEventListener("submit", async (e) => {
   e.preventDefault();
   const title = taskInputDOM.value;
+  const priority = Array.from(taskPriorityDOM).find((p) => p.checked).value; // Get the value of the selected priority
 
   try {
-    await axios.post("/api/v1/tasks", { title });
+    await axios.post("/api/v1/tasks", { title, priority });
     showTasks();
     taskInputDOM.value = "";
     formAlertDOM.style.display = "block";
@@ -113,7 +115,9 @@ formDOM.addEventListener("submit", async (e) => {
     formAlertDOM.classList.add("text-success");
   } catch (error) {
     formAlertDOM.style.display = "block";
-    formAlertDOM.innerHTML = `error, please try again`;
+    formAlertDOM.innerHTML = `error, please try again ${JSON.stringify(
+      error.response.data.message
+    )}`;
   }
   setTimeout(() => {
     formAlertDOM.style.display = "none";

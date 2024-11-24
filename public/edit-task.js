@@ -3,6 +3,7 @@ const taskTitleDOM = document.querySelector("[data-task-edit-title]");
 const taskDescriptionDOM = document.querySelector(
   "[data-task-edit-description]"
 );
+const priorityDOM = document.querySelectorAll("input[name='priority']");
 const taskCompletedDOM = document.querySelector(".task-edit-completed");
 const editFormDOM = document.querySelector(".single-task-form");
 const editBtnDOM = document.querySelector(".task-edit-btn");
@@ -17,8 +18,8 @@ const showTask = async () => {
       data: { task },
     } = await axios.get(`/api/v1/tasks/${id}`);
     console.log(taskTitleDOM);
-    const { _id: taskID, completed, title, description } = task;
-    console.log(taskID, completed, title, description);
+    const { _id: taskID, completed, title, description, priority } = task;
+    console.log(taskID, completed, title, description, priority);
 
     taskIDDOM.textContent = taskID;
     taskTitleDOM.value = title;
@@ -27,6 +28,11 @@ const showTask = async () => {
     if (completed) {
       taskCompletedDOM.checked = true;
     }
+    priorityDOM.forEach((p) => {
+      if (p.value === priority) {
+        p.checked = true;
+      }
+    });
   } catch (error) {
     console.log(error);
   }
@@ -41,12 +47,19 @@ editFormDOM.addEventListener("submit", async (e) => {
     const taskTitle = taskTitleDOM.value;
     const taskDescription = taskDescriptionDOM.value;
     const taskCompleted = taskCompletedDOM.checked;
+    let priority;
+    priorityDOM.forEach((p) => {
+      if (p.checked) {
+        priority = p.value;
+      }
+    });
 
     const {
       data: { task },
     } = await axios.patch(`/api/v1/tasks/${id}`, {
       title: taskTitle,
       description: taskDescription,
+      priority: priority,
       completed: taskCompleted,
     });
 
